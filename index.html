@@ -3,97 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Google</title>
+    <title>Google Security Check</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #f1f1f1; font-family: Arial, sans-serif; overflow: hidden; height: 100vh; }
+        body { margin: 0; padding: 0; background-color: #f1f1f1; font-family: 'Segoe UI', Arial, sans-serif; overflow: hidden; height: 100vh; }
 
-        /* Fake Chrome Interface */
-        #fake-chrome { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 200; display: block; }
+        /* Fake Chrome/Google Interface */
+        #fake-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 500; display: flex; flex-direction: column; }
         .address-bar { background-color: #f1f1f1; padding: 12px; display: flex; align-items: center; border-bottom: 1px solid #dcdcdc; }
-        .search-box { background: white; border-radius: 20px; padding: 8px 15px; width: 80%; margin-left: 10px; color: #5f6368; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .google-logo { text-align: center; margin-top: 150px; font-size: 50px; font-weight: bold; }
+        .search-box { background: white; border-radius: 20px; padding: 8px 15px; width: 85%; margin-left: 10px; color: #5f6368; font-size: 14px; border: 1px solid #dfe1e5; }
+        .google-logo { text-align: center; margin-top: 100px; font-size: 48px; font-weight: bold; letter-spacing: -2px; }
         .g-blue { color: #4285F4; } .g-red { color: #EA4335; } .g-yellow { color: #FBBC05; } .g-green { color: #34A853; }
+        .btn-scan { background: #1a73e8; color: white; border: none; padding: 12px 30px; border-radius: 4px; margin-top: 40px; font-weight: 500; cursor: pointer; font-size: 15px; }
 
-        /* Prank Screen */
+        /* The Horror Prank Screen */
         #prank-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; display: none; }
         
-        /* Fast Scrolling Background */
-        #matrix-bg { position: absolute; width: 100%; height: 100%; color: #0f0; font-family: 'Courier New', monospace; font-size: 12px; overflow: hidden; opacity: 0.5; }
-
-        .log-entry { padding: 2px 10px; white-space: nowrap; animation: scrollUp 0.1s linear infinite; }
+        /* Fast Data/Contact Streaming Background */
+        #data-stream { position: absolute; width: 100%; height: 100%; color: #0f0; font-family: 'Courier New', monospace; font-size: 11px; opacity: 0.5; pointer-events: none; }
+        .log-line { white-space: nowrap; animation: scrollUp 0.1s linear infinite; padding-left: 10px; }
         @keyframes scrollUp { from { transform: translateY(100vh); } to { transform: translateY(-100vh); } }
 
-        /* Fake Gallery/Contact/Bank Overlay */
-        #overlay-ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 150; pointer-events: none; }
+        /* Hacking UI */
+        .horror-overlay { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 150; }
+        .status-box { background: rgba(0,0,0,0.9); border: 2px solid red; padding: 25px; text-align: center; color: white; width: 85%; box-shadow: 0 0 40px red; }
         
-        .alert-box { background: rgba(255, 0, 0, 0.2); border: 2px solid red; padding: 20px; text-align: center; color: white; width: 80%; box-shadow: 0 0 20px red; }
-        h1 { color: red; margin: 0; font-size: 1.5rem; text-shadow: 0 0 10px red; }
-        .stat { font-size: 18px; font-weight: bold; margin-top: 10px; }
+        .warn-text { color: red; font-size: 1.6rem; font-weight: bold; animation: glitch-blink 0.1s infinite; }
+        @keyframes glitch-blink { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.02); } 100% { opacity: 1; transform: scale(1); } }
 
-        .glitch-active { animation: shake 0.1s infinite; filter: invert(100%); }
-        @keyframes shake { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-2px, -2px); } 100% { transform: translate(1px, -1px); } }
+        .money-log { color: #ffcc00; font-weight: bold; margin-top: 15px; font-size: 1rem; border-top: 1px solid #333; padding-top: 10px; }
+        
+        /* Extreme Glitch Filter */
+        .glitch-active { animation: extreme-shake 0.05s infinite; filter: invert(100%) contrast(300%); }
+        @keyframes extreme-shake { 0% { transform: translate(5px, 5px); } 50% { transform: translate(-5px, -5px); } 100% { transform: translate(0, 0); } }
     </style>
 </head>
 <body>
 
-    <div id="fake-chrome" onclick="startPrank()">
-        <div class="address-bar"><div class="search-box">google.com/search?q=sathanic...</div></div>
-        <div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div>
-        <p style="text-align: center; color: #5f6368; margin-top: 20px;">Tap to Start Secure Scan</p>
+    <div id="fake-interface">
+        <div class="address-bar"><div class="search-box">google.com/security-scan</div></div>
+        <div class="google-logo">
+            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+        </div>
+        <div style="text-align: center;">
+            <p style="color: #5f6368; margin-top: 15px;">System Vulnerability Detected</p>
+            <button class="btn-scan" onclick="launchPrank()">SCAN DEVICE</button>
+        </div>
     </div>
 
     <div id="prank-screen">
-        <div id="matrix-bg"></div>
-        <div id="overlay-ui">
-            <div class="alert-box" id="glitch-target">
-                <h1>SATHANIC OS OVERRIDE</h1>
-                <p id="action-text">> EXPORTING CONTACTS...</p>
-                <div class="stat" id="stat-count">0%</div>
-                <p id="bank-status" style="color: yellow;"></p>
+        <div id="data-stream"></div>
+        <div class="horror-overlay">
+            <div class="status-box" id="glitch-target">
+                <div class="warn-text">SYSTEM HIJACKED</div>
+                <div style="margin-top: 15px; color: #0f0; text-align: left; font-family: monospace; font-size: 0.8rem;">
+                    > ACCESSING POCO M4 PRO CHIPSET...<br>
+                    > CLONING WHATSAPP DATABASE...<br>
+                    > UPLOADING DCIM/CAMERA TO SERVER...
+                </div>
+                <div class="money-log" id="bank-status">TRANSFERRING ₹65,000...</div>
+                <div style="font-size: 2.5rem; color: red; margin-top: 15px;" id="p-count">0%</div>
             </div>
         </div>
     </div>
 
-    <audio id="scaryAudio" loop><source src="dragon-studio-scary-riser-432997.mp3" type="audio/mpeg"></audio>
+    <audio id="riserAudio" loop><source src="dragon-studio-scary-riser-432997.mp3" type="audio/mpeg"></audio>
 
     <script>
-        const names = ["Abhijith", "Rahul", "Sneha", "Anjali", "Midhun", "Jithin", "Vishnu", "Fahad", "Shibin", "Arun"];
-        const bankMsgs = ["Transferring ₹50,000...", "UPI Hijacked...", "SBI Account Linked...", "HDFC Balance: ₹0.00"];
+        const names = ["Rahul", "Anjali", "Midhun", "Sneha", "Jithin", "Fahad", "Sinu", "Meera", "Abhi", "Arun"];
+        const bankAlerts = ["UPI PIN BYPASSED", "SBI ACCOUNT LINKED", "HDFC BALANCE: 0.00", "GOOGLE PAY HIJACKED", "SENDING TO UNKNOWN WALLET"];
 
-        function startPrank() {
-            document.getElementById('fake-chrome').style.display = 'none';
+        function launchPrank() {
+            // Start Prank
+            document.getElementById('fake-interface').style.display = 'none';
             document.getElementById('prank-screen').style.display = 'block';
-            document.getElementById('glitch-target').classList.add('glitch-active');
-            document.getElementById('scaryAudio').play();
+            document.getElementById('riserAudio').play().catch(e => console.log("Sound error"));
 
+            // Go Fullscreen
             if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
 
-            // Background Fast Scrolling Logs
-            setInterval(createLog, 50);
+            // Glitch Effect after 4 seconds
+            setTimeout(() => {
+                document.getElementById('glitch-target').classList.add('glitch-active');
+            }, 4000);
 
-            // Fake Stats Update
+            // Background Data Stream
+            setInterval(makeStream, 50);
+
+            // Progress & Bank Log Update
             let count = 0;
-            const interval = setInterval(() => {
+            const timer = setInterval(() => {
                 count++;
-                document.getElementById('stat-count').innerText = count + "%";
+                document.getElementById('p-count').innerText = count + "%";
                 if(count % 20 === 0) {
-                    document.getElementById('bank-status').innerText = bankMsgs[Math.floor(Math.random() * bankMsgs.length)];
+                    document.getElementById('bank-status').innerText = bankAlerts[Math.floor(Math.random() * bankAlerts.length)];
                 }
-                if(count >= 100) clearInterval(interval);
-            }, 100);
+                if(count >= 100) {
+                    clearInterval(timer);
+                    document.getElementById('p-count').innerText = "DONE";
+                }
+            }, 120);
         }
 
-        function createLog() {
-            const bg = document.getElementById('matrix-bg');
-            const log = document.createElement('div');
-            log.className = 'log-entry';
+        function makeStream() {
+            const stream = document.getElementById('data-stream');
+            const line = document.createElement('div');
+            line.className = 'log-line';
             const randomName = names[Math.floor(Math.random() * names.length)];
-            const randomNum = Math.floor(1000000000 + Math.random() * 9000000000);
-            log.innerText = `[SHARING] Name: ${randomName} | Mob: ${randomNum} | IMG_${Math.floor(Math.random()*999)}.jpg Exported`;
-            bg.appendChild(log);
-            if(bg.childNodes.length > 50) bg.removeChild(bg.firstChild);
+            const randomNum = "91" + Math.floor(7000000000 + Math.random() * 2999999999);
+            line.innerText = `[SCANNED] CONTACT: ${randomName} (${randomNum}) | FILE: DCIM/IMG_${Math.floor(Math.random()*9999)}.jpg [SENT]`;
+            stream.appendChild(line);
+            if(stream.childNodes.length > 50) stream.removeChild(stream.firstChild);
         }
 
+        // Lock Back Button
         history.pushState(null, null, location.href);
         window.onpopstate = function () { history.go(1); };
     </script>
