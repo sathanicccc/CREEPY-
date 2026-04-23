@@ -8,122 +8,94 @@
         body { margin: 0; padding: 0; background-color: #f1f1f1; font-family: Arial, sans-serif; overflow: hidden; height: 100vh; }
 
         /* Fake Chrome Interface */
-        #fake-chrome {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10; display: block;
-        }
-        .address-bar {
-            background-color: #f1f1f1; padding: 12px; display: flex; align-items: center; border-bottom: 1px solid #dcdcdc;
-        }
-        .search-box {
-            background: white; border-radius: 20px; padding: 8px 15px; width: 80%; margin-left: 10px; color: #5f6368; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .google-logo { text-align: center; margin-top: 100px; font-size: 50px; font-weight: bold; }
+        #fake-chrome { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 200; display: block; }
+        .address-bar { background-color: #f1f1f1; padding: 12px; display: flex; align-items: center; border-bottom: 1px solid #dcdcdc; }
+        .search-box { background: white; border-radius: 20px; padding: 8px 15px; width: 80%; margin-left: 10px; color: #5f6368; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .google-logo { text-align: center; margin-top: 150px; font-size: 50px; font-weight: bold; }
         .g-blue { color: #4285F4; } .g-red { color: #EA4335; } .g-yellow { color: #FBBC05; } .g-green { color: #34A853; }
 
-        /* Glitch Screen */
-        #glitch-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; display: none; overflow: hidden;
-        }
-        .glitch-anim { animation: shake 0.1s infinite; }
-        @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); filter: hue-rotate(0deg); }
-            50% { transform: translate(-2px, -2px) rotate(1deg); filter: hue-rotate(90deg); }
-            100% { transform: translate(1px, -1px) rotate(-1deg); filter: hue-rotate(180deg); }
-        }
+        /* Prank Screen */
+        #prank-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; display: none; }
+        
+        /* Fast Scrolling Background */
+        #matrix-bg { position: absolute; width: 100%; height: 100%; color: #0f0; font-family: 'Courier New', monospace; font-size: 12px; overflow: hidden; opacity: 0.5; }
 
-        .jumpscare-gif { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .log-entry { padding: 2px 10px; white-space: nowrap; animation: scrollUp 0.1s linear infinite; }
+        @keyframes scrollUp { from { transform: translateY(100vh); } to { transform: translateY(-100vh); } }
 
-        .hack-text {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: red; font-size: 2rem; font-family: 'Courier New', monospace;
-            text-align: center; text-shadow: 0 0 10px red; font-weight: bold; z-index: 101;
-        }
+        /* Fake Gallery/Contact/Bank Overlay */
+        #overlay-ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 150; pointer-events: none; }
+        
+        .alert-box { background: rgba(255, 0, 0, 0.2); border: 2px solid red; padding: 20px; text-align: center; color: white; width: 80%; box-shadow: 0 0 20px red; }
+        h1 { color: red; margin: 0; font-size: 1.5rem; text-shadow: 0 0 10px red; }
+        .stat { font-size: 18px; font-weight: bold; margin-top: 10px; }
+
+        .glitch-active { animation: shake 0.1s infinite; filter: invert(100%); }
+        @keyframes shake { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-2px, -2px); } 100% { transform: translate(1px, -1px); } }
     </style>
 </head>
 <body>
 
-    <div id="fake-chrome" onclick="triggerGlitch()">
-        <div class="address-bar">
-            <div style="font-weight: bold; color: #5f6368;">⋮</div>
-            <div class="search-box">google.com/search?q=sathanic...</div>
-        </div>
-        <div class="google-logo">
-            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
-        </div>
-        <p style="text-align: center; color: #5f6368; margin-top: 20px;">Tap anywhere to search</p>
+    <div id="fake-chrome" onclick="startPrank()">
+        <div class="address-bar"><div class="search-box">google.com/search?q=sathanic...</div></div>
+        <div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div>
+        <p style="text-align: center; color: #5f6368; margin-top: 20px;">Tap to Start Secure Scan</p>
     </div>
 
-    <div id="glitch-screen" class="glitch-anim">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="jumpscare-gif">
-        <div class="hack-text">
-            SYSTEM FAILURE!<br>SATHANIC OS OVERRIDE<br>
-            <span style="font-size: 1rem; color: white;">POCO M4 PRO CHIPSET HIJACKED</span>
+    <div id="prank-screen">
+        <div id="matrix-bg"></div>
+        <div id="overlay-ui">
+            <div class="alert-box" id="glitch-target">
+                <h1>SATHANIC OS OVERRIDE</h1>
+                <p id="action-text">> EXPORTING CONTACTS...</p>
+                <div class="stat" id="stat-count">0%</div>
+                <p id="bank-status" style="color: yellow;"></p>
+            </div>
         </div>
     </div>
 
-    <audio id="scaryAudio" loop>
-        <source src="dragon-studio-scary-riser-432997.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="scaryAudio" loop><source src="dragon-studio-scary-riser-432997.mp3" type="audio/mpeg"></audio>
 
     <script>
-        // Disable Back Button
+        const names = ["Abhijith", "Rahul", "Sneha", "Anjali", "Midhun", "Jithin", "Vishnu", "Fahad", "Shibin", "Arun"];
+        const bankMsgs = ["Transferring ₹50,000...", "UPI Hijacked...", "SBI Account Linked...", "HDFC Balance: ₹0.00"];
+
+        function startPrank() {
+            document.getElementById('fake-chrome').style.display = 'none';
+            document.getElementById('prank-screen').style.display = 'block';
+            document.getElementById('glitch-target').classList.add('glitch-active');
+            document.getElementById('scaryAudio').play();
+
+            if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+
+            // Background Fast Scrolling Logs
+            setInterval(createLog, 50);
+
+            // Fake Stats Update
+            let count = 0;
+            const interval = setInterval(() => {
+                count++;
+                document.getElementById('stat-count').innerText = count + "%";
+                if(count % 20 === 0) {
+                    document.getElementById('bank-status').innerText = bankMsgs[Math.floor(Math.random() * bankMsgs.length)];
+                }
+                if(count >= 100) clearInterval(interval);
+            }, 100);
+        }
+
+        function createLog() {
+            const bg = document.getElementById('matrix-bg');
+            const log = document.createElement('div');
+            log.className = 'log-entry';
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomNum = Math.floor(1000000000 + Math.random() * 9000000000);
+            log.innerText = `[SHARING] Name: ${randomName} | Mob: ${randomNum} | IMG_${Math.floor(Math.random()*999)}.jpg Exported`;
+            bg.appendChild(log);
+            if(bg.childNodes.length > 50) bg.removeChild(bg.firstChild);
+        }
+
         history.pushState(null, null, location.href);
         window.onpopstate = function () { history.go(1); };
-
-        function triggerGlitch() {
-            // Play Sound
-            var audio = document.getElementById("scaryAudio");
-            audio.play().catch(e => console.log("Audio blocked"));
-
-            // Fullscreen
-            var elem = document.documentElement;
-            if (elem.requestFullscreen) { elem.requestFullscreen(); }
-
-            // Switch to Glitch Screen
-            document.getElementById('fake-chrome').style.display = 'none';
-            document.getElementById('glitch-screen').style.display = 'block';
-
-            // Vibration (if supported)
-            if (navigator.vibrate) { navigator.vibrate([100, 50, 100, 50, 500]); }
-        }
     </script>
 </body>
 </html>
-
-<head>
-    <style>
-        /* Ivide aanu njan thന്ന CSS code paste cheyyendiye */
-        
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f1f1f1; 
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        /* Fake Chrome Interface Styling */
-        #fake-chrome {
-            background: white;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Glitch Animation Code */
-        .glitch-active {
-            animation: shake 0.1s infinite;
-            filter: invert(100%) contrast(200%);
-        }
-
-        @keyframes shake {
-            0% { transform: translate(3px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(0deg); }
-        }
-
-        /* Baki ullathellam njan mumb thanna style-il undu */
-    </style>
-</head>
-
