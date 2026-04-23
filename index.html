@@ -2,125 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sathanic_webviwe_Os</title>
     <style>
         body { 
-            margin: 0; 
-            padding: 0;
-            background-color: black; 
-            color: #00ff00; /* Matrix Green */
-            font-family: 'Courier New', Courier, monospace; 
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0; padding: 0; background-color: black; color: #00ff00; 
+            font-family: 'Courier New', Courier, monospace; overflow: hidden;
+            height: 100vh; display: flex; justify-content: center; align-items: center;
         }
         
-        /* Creepy Background GIF */
+        /* The Scary Visual - Fixed Link */
         .bg-gif {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            opacity: 0.8;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1; display: block;
         }
 
-        /* Hacking Text Overlay */
         .overlay {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border: 2px solid red;
+            position: relative; z-index: 2; text-align: center;
+            background: rgba(0, 0, 0, 0.8); padding: 20px; border: 2px solid red;
+            width: 85%; border-radius: 10px;
         }
 
-        h1 {
-            color: red;
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px red;
-            animation: blink 0.1s infinite;
-        }
+        h1 { color: red; font-size: 1.8rem; text-shadow: 0 0 10px red; animation: blink 0.1s infinite; }
+        .details { font-size: 0.9rem; line-height: 1.6; text-align: left; margin-top: 10px; }
 
-        .details {
-            font-size: 1.2rem;
-            line-height: 1.5;
-        }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.1; }
-            100% { opacity: 1; }
-        }
-
-        /* Red Alert Effect */
-        .glitch-red {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 0, 0, 0.1);
-            z-index: 3;
-            pointer-events: none;
-            display: none;
+        /* Full Screen Click Trigger Overlay */
+        #click-trigger {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100; background: rgba(0,0,0,0.1); cursor: pointer;
         }
     </style>
 </head>
-<body onclick="startPrank()">
+<body>
 
-    <img src="https://media.tenor.com/7YjXw-lR0l4AAAAC/spooky%27s-jumpscare-mansion-ringu.gif" class="bg-gif">
+    <div id="click-trigger" onclick="activateSathan()"></div>
 
-    <div class="glitch-red" id="glitch"></div>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="bg-gif">
 
     <div class="overlay" id="main-box">
         <h1>SATHAN HACKED YOUR DEVICE</h1>
         <div class="details">
-            <p>> Accessing Device Chipset...</p>
-            <p>> Exporting Gallery: 1422 Photos...</p>
-            <p>> Sharing Contacts to DeepWeb...</p>
-            <p style="color: white; font-weight: bold;">I WILL SEE YOU SOON.</p>
+            <p>> STAGE: CHIPSET HIJACKED (POCO M4 PRO)</p>
+            <p>> GALLERY: EXPORTING ALL MEDIA...</p>
+            <p>> CONTACTS: SHARING TO DARKNET...</p>
+            <p>> STATUS: <span style="color:red;">DEVICE CONTROL LOST</span></p>
+            <hr>
+            <p style="text-align:center; color:white;">I AM WATCHING YOU.</p>
         </div>
     </div>
 
-    <audio id="scarySound" loop>
-        <source src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=612177" type="audio/mpeg">
+    <audio id="horrorAudio" loop>
+        <source src="https://www.soundjay.com/ambient/sounds/creepy-noise-1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // No Escape Logic
+        // No Escape Logic (Back button disable)
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
             history.go(1);
         };
 
-        function startPrank() {
+        function activateSathan() {
             // Play Sound
-            var audio = document.getElementById("scarySound");
-            audio.play();
+            var audio = document.getElementById("horrorAudio");
+            audio.play().catch(e => console.log("Click again to play sound"));
 
-            // Fullscreen trigger
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            }
+            // Go Fullscreen
+            var elem = document.documentElement;
+            if (elem.requestFullscreen) { elem.requestFullscreen(); }
+            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
 
-            // Show Red Glitch
-            document.getElementById('glitch').style.display = 'block';
+            // Hide the click trigger
+            document.getElementById('click-trigger').style.display = 'none';
 
-            // Vanish text after 10 seconds
+            // Vanish text box after 8 seconds for pure horror
             setTimeout(function() {
-                document.getElementById('main-box').style.opacity = '0';
-                document.getElementById('main-box').style.transition = 'opacity 2s';
-            }, 10000);
+                document.getElementById('main-box').style.display = 'none';
+            }, 8000);
         }
 
-        // Prevent Right Click
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        // Disable Long Press/Right Click
+        window.oncontextmenu = function() { return false; }
     </script>
 </body>
 </html>
