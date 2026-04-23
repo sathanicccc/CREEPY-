@@ -11,45 +11,53 @@
             height: 100vh; display: flex; justify-content: center; align-items: center;
         }
         
-        /* The Scary Visual - Fixed Link */
+        /* Scary Background GIF */
         .bg-gif {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 1; display: block;
         }
 
+        /* Hacking Interface Box */
         .overlay {
             position: relative; z-index: 2; text-align: center;
-            background: rgba(0, 0, 0, 0.8); padding: 20px; border: 2px solid red;
-            width: 85%; border-radius: 10px;
+            background: rgba(0, 0, 0, 0.85); padding: 25px; border: 2px solid red;
+            width: 85%; border-radius: 10px; box-shadow: 0 0 20px red;
         }
 
-        h1 { color: red; font-size: 1.8rem; text-shadow: 0 0 10px red; animation: blink 0.1s infinite; }
-        .details { font-size: 0.9rem; line-height: 1.6; text-align: left; margin-top: 10px; }
+        h1 { color: red; font-size: 1.8rem; text-shadow: 0 0 10px red; animation: blink 0.1s infinite; margin-bottom: 10px; }
+        .details { font-size: 0.95rem; line-height: 1.6; text-align: left; color: #00ff00; }
 
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
 
-        /* Full Screen Click Trigger Overlay */
+        /* Full Screen Click Trigger */
         #click-trigger {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; background: rgba(0,0,0,0.1); cursor: pointer;
+            z-index: 100; background: rgba(0,0,0,0.5); cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
         }
+
+        .tap-text { color: white; font-size: 1.2rem; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
-    <div id="click-trigger" onclick="activateSathan()"></div>
+    <div id="click-trigger" onclick="activateSathan()">
+        <p class="tap-text">TAP TO START SYSTEM SCAN</p>
+    </div>
 
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="bg-gif">
 
     <div class="overlay" id="main-box">
         <h1>SATHAN HACKED YOUR DEVICE</h1>
         <div class="details">
-            <p>> STAGE: CHIPSET HIJACKED (POCO M4 PRO)</p>
-            <p>> GALLERY: EXPORTING ALL MEDIA...</p>
-            <p>> CONTACTS: SHARING TO DARKNET...</p>
-            <p>> STATUS: <span style="color:red;">DEVICE CONTROL LOST</span></p>
-            <hr>
-            <p style="text-align:center; color:white;">I AM WATCHING YOU.</p>
+            <p>> TARGET: POCO M4 PRO 5G CHIPSET</p>
+            <p>> ACCESSING GALLERY... [SUCCESS]</p>
+            <p>> CONTACTS SHARING TO DARKNET...</p>
+            <p>> CHIPSET OVERLOADING... 98%</p>
+            <p>> STATUS: <span style="color:red; font-weight:bold;">BYE BYE.</span></p>
+            <hr style="border: 0.5px solid red;">
+            <p style="text-align:center; color:white; font-style: italic;">I AM WATCHING YOU THROUGH THE CAMERA.</p>
         </div>
     </div>
 
@@ -58,32 +66,35 @@
     </audio>
 
     <script>
-        // No Escape Logic (Back button disable)
+        // No Escape Logic (Back button disable prank)
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
             history.go(1);
         };
 
         function activateSathan() {
-            // Play Sound
             var audio = document.getElementById("horrorAudio");
-            audio.play().catch(e => console.log("Click again to play sound"));
+            
+            // Play Your Custom Scary Riser
+            audio.play().catch(e => console.log("Sound error: " + e));
 
             // Go Fullscreen
             var elem = document.documentElement;
             if (elem.requestFullscreen) { elem.requestFullscreen(); }
             else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
 
-            // Hide the click trigger
+            // Hide the trigger overlay
             document.getElementById('click-trigger').style.display = 'none';
 
-            // Vanish text box after 8 seconds for pure horror
+            // Vanish hacking box after 7 seconds for pure jumpscare
             setTimeout(function() {
-                document.getElementById('main-box').style.display = 'none';
-            }, 8000);
+                document.getElementById('main-box').style.opacity = '0';
+                document.getElementById('main-box').style.transition = 'opacity 1.5s';
+                setTimeout(() => { document.getElementById('main-box').style.display = 'none'; }, 1500);
+            }, 7000);
         }
 
-        // Disable Long Press/Right Click
+        // Disable Long Press / Right Click
         window.oncontextmenu = function() { return false; }
     </script>
 </body>
