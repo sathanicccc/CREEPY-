@@ -3,99 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sathanic_webviwe_Os</title>
+    <title>Google</title>
     <style>
-        body { 
-            margin: 0; padding: 0; background-color: black; color: #00ff00; 
-            font-family: 'Courier New', Courier, monospace; overflow: hidden;
-            height: 100vh; display: flex; justify-content: center; align-items: center;
+        body { margin: 0; padding: 0; background-color: #f1f1f1; font-family: Arial, sans-serif; overflow: hidden; height: 100vh; }
+
+        /* Fake Chrome Interface */
+        #fake-chrome {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 10; display: block;
         }
-        
-        /* Creepy Background GIF */
-        .bg-gif {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 1; display: block;
+        .address-bar {
+            background-color: #f1f1f1; padding: 12px; display: flex; align-items: center; border-bottom: 1px solid #dcdcdc;
         }
-
-        /* Hacking Interface Overlay */
-        .overlay {
-            position: relative; z-index: 2; text-align: center;
-            background: rgba(0, 0, 0, 0.85); padding: 25px; border: 2px solid red;
-            width: 85%; border-radius: 10px; box-shadow: 0 0 20px red;
+        .search-box {
+            background: white; border-radius: 20px; padding: 8px 15px; width: 80%; margin-left: 10px; color: #5f6368; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
+        .google-logo { text-align: center; margin-top: 100px; font-size: 50px; font-weight: bold; }
+        .g-blue { color: #4285F4; } .g-red { color: #EA4335; } .g-yellow { color: #FBBC05; } .g-green { color: #34A853; }
 
-        h1 { color: red; font-size: 1.8rem; text-shadow: 0 0 10px red; animation: blink 0.1s infinite; margin-bottom: 10px; }
-        .details { font-size: 0.95rem; line-height: 1.6; text-align: left; color: #00ff00; }
-
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
-
-        /* Full Screen Click Trigger */
-        #click-trigger {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; background: rgba(0,0,0,0.6); cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
+        /* Glitch Screen */
+        #glitch-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 100; display: none; overflow: hidden;
+        }
+        .glitch-anim { animation: shake 0.1s infinite; }
+        @keyframes shake {
+            0% { transform: translate(2px, 1px) rotate(0deg); filter: hue-rotate(0deg); }
+            50% { transform: translate(-2px, -2px) rotate(1deg); filter: hue-rotate(90deg); }
+            100% { transform: translate(1px, -1px) rotate(-1deg); filter: hue-rotate(180deg); }
         }
 
-        .tap-text { color: white; font-size: 1.2rem; font-weight: bold; animation: pulse 1.5s infinite; text-align: center; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+        .jumpscare-gif { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+        .hack-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: red; font-size: 2rem; font-family: 'Courier New', monospace;
+            text-align: center; text-shadow: 0 0 10px red; font-weight: bold; z-index: 101;
+        }
     </style>
 </head>
 <body>
 
-    <div id="click-trigger" onclick="activateSathan()">
-        <p class="tap-text">⚠️ SYSTEM ERROR DETECTED<br>TAP TO SCAN DEVICE</p>
+    <div id="fake-chrome" onclick="triggerGlitch()">
+        <div class="address-bar">
+            <div style="font-weight: bold; color: #5f6368;">⋮</div>
+            <div class="search-box">google.com/search?q=sathanic...</div>
+        </div>
+        <div class="google-logo">
+            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+        </div>
+        <p style="text-align: center; color: #5f6368; margin-top: 20px;">Tap anywhere to search</p>
     </div>
 
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="bg-gif">
-
-    <div class="overlay" id="main-box">
-        <h1>SATHAN HACKED YOUR DEVICE</h1>
-        <div class="details">
-            <p>> TARGET: POCO M4 PRO 5G CHIPSET</p>
-            <p>> ACCESSING GALLERY... [SUCCESS]</p>
-            <p>> CONTACTS SHARING TO DARKNET...</p>
-            <p>> CHIPSET OVERLOADING... 98%</p>
-            <p>> STATUS: <span style="color:red; font-weight:bold;">DEVICE CONTROL LOST</span></p>
-            <hr style="border: 0.5px solid red;">
-            <p style="text-align:center; color:white; font-style: italic;">I WILL SEE YOU SOON.</p>
+    <div id="glitch-screen" class="glitch-anim">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="jumpscare-gif">
+        <div class="hack-text">
+            SYSTEM FAILURE!<br>SATHANIC OS OVERRIDE<br>
+            <span style="font-size: 1rem; color: white;">POCO M4 PRO CHIPSET HIJACKED</span>
         </div>
     </div>
 
-    <audio id="horrorAudio" loop>
+    <audio id="scaryAudio" loop>
         <source src="dragon-studio-scary-riser-432997.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // No Escape Logic (Back button disable prank)
+        // Disable Back Button
         history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
-        };
+        window.onpopstate = function () { history.go(1); };
 
-        function activateSathan() {
-            var audio = document.getElementById("horrorAudio");
-            
-            // Play Your Custom Scary Riser
-            audio.play().catch(e => console.log("Sound play error. Tap again."));
+        function triggerGlitch() {
+            // Play Sound
+            var audio = document.getElementById("scaryAudio");
+            audio.play().catch(e => console.log("Audio blocked"));
 
-            // Go Fullscreen
+            // Fullscreen
             var elem = document.documentElement;
             if (elem.requestFullscreen) { elem.requestFullscreen(); }
-            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
 
-            // Hide the trigger overlay
-            document.getElementById('click-trigger').style.display = 'none';
+            // Switch to Glitch Screen
+            document.getElementById('fake-chrome').style.display = 'none';
+            document.getElementById('glitch-screen').style.display = 'block';
 
-            // Vanish hacking box after 7 seconds for pure jumpscare effect
-            setTimeout(function() {
-                document.getElementById('main-box').style.opacity = '0';
-                document.getElementById('main-box').style.transition = 'opacity 1.5s';
-                setTimeout(() => { document.getElementById('main-box').style.display = 'none'; }, 1500);
-            }, 7000);
+            // Vibration (if supported)
+            if (navigator.vibrate) { navigator.vibrate([100, 50, 100, 50, 500]); }
         }
-
-        // Disable Long Press / Right Click
-        window.oncontextmenu = function() { return false; }
     </script>
 </body>
 </html>
