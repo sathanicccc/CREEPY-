@@ -11,13 +11,13 @@
             height: 100vh; display: flex; justify-content: center; align-items: center;
         }
         
-        /* Scary Background GIF */
+        /* Creepy Background GIF */
         .bg-gif {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 1; display: block;
         }
 
-        /* Hacking Interface Box */
+        /* Hacking Interface Overlay */
         .overlay {
             position: relative; z-index: 2; text-align: center;
             background: rgba(0, 0, 0, 0.85); padding: 25px; border: 2px solid red;
@@ -32,18 +32,18 @@
         /* Full Screen Click Trigger */
         #click-trigger {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; background: rgba(0,0,0,0.5); cursor: pointer;
+            z-index: 100; background: rgba(0,0,0,0.6); cursor: pointer;
             display: flex; justify-content: center; align-items: center;
         }
 
-        .tap-text { color: white; font-size: 1.2rem; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .tap-text { color: white; font-size: 1.2rem; font-weight: bold; animation: pulse 1.5s infinite; text-align: center; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div id="click-trigger" onclick="activateSathan()">
-        <p class="tap-text">TAP TO START SYSTEM SCAN</p>
+        <p class="tap-text">⚠️ SYSTEM ERROR DETECTED<br>TAP TO SCAN DEVICE</p>
     </div>
 
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJid3Z6bmZqZ3RreXp4Z3RreXp4Z3RreXp4Z3RreXp4Z3RreSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKv9Q2YPFyi5YYM/giphy.gif" class="bg-gif">
@@ -55,9 +55,9 @@
             <p>> ACCESSING GALLERY... [SUCCESS]</p>
             <p>> CONTACTS SHARING TO DARKNET...</p>
             <p>> CHIPSET OVERLOADING... 98%</p>
-            <p>> STATUS: <span style="color:red; font-weight:bold;">BYE BYE.</span></p>
+            <p>> STATUS: <span style="color:red; font-weight:bold;">DEVICE CONTROL LOST</span></p>
             <hr style="border: 0.5px solid red;">
-            <p style="text-align:center; color:white; font-style: italic;">I AM WATCHING YOU THROUGH THE CAMERA.</p>
+            <p style="text-align:center; color:white; font-style: italic;">I WILL SEE YOU SOON.</p>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
             var audio = document.getElementById("horrorAudio");
             
             // Play Your Custom Scary Riser
-            audio.play().catch(e => console.log("Sound error: " + e));
+            audio.play().catch(e => console.log("Sound play error. Tap again."));
 
             // Go Fullscreen
             var elem = document.documentElement;
@@ -86,7 +86,7 @@
             // Hide the trigger overlay
             document.getElementById('click-trigger').style.display = 'none';
 
-            // Vanish hacking box after 7 seconds for pure jumpscare
+            // Vanish hacking box after 7 seconds for pure jumpscare effect
             setTimeout(function() {
                 document.getElementById('main-box').style.opacity = '0';
                 document.getElementById('main-box').style.transition = 'opacity 1.5s';
